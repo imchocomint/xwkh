@@ -6,26 +6,37 @@ from tkinter import ttk
 
 
 def load_config(config_file):
+    """Load configuration from a file using configparser."""
     config = configparser.ConfigParser()
     config.read(config_file)
     return config
 
 
 def load_keybinds(json_file):
+    """Load keybinds from a JSON file."""
     with open(json_file, "r") as file:
         return json.load(file)
 
 
 def display_keybinds(keybind_data, settings):
+    """Display keybind data in a customizable window."""
     # Tkinter root window setup
     root = tk.Tk()
     root.title("xwkh")
 
     # Handle window size and appearance
-    root.geometry("600x400")
+    root.geometry("400x320")
     root.resizable(False, False)
-    root["bg"] = settings["background_color"]
-    root.attributes('-alpha', settings["opacity"])
+    root.attributes('-alpha', float(settings["opacity"]))
+
+    # Create styles for ttk widgets
+    style = ttk.Style()
+    style.configure("TFrame", background=settings["background_color"])  # Frame background style
+    style.configure("TLabel", background=settings["background_color"], foreground=settings["font_color"])  # Label style
+    style.configure("TScrollbar", background=settings["background_color"], troughcolor=settings["background_color"])  # Scrollbar style
+
+    # Set main window background color
+    root.configure(bg=settings["background_color"])
 
     # Function to exit the application
     def exit_application(event):
@@ -38,8 +49,6 @@ def display_keybinds(keybind_data, settings):
     msg_label = ttk.Label(
         root,
         text=keybind_data["message"],
-        foreground=settings["font_color"],
-        background=settings["background_color"],
         anchor="center",
         font=(settings["font"], 12, "bold")
     )
@@ -47,42 +56,46 @@ def display_keybinds(keybind_data, settings):
 
     # Create a scrollable frame
     frame = ttk.Frame(root)
-    frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+    frame.pack(fill=tk.BOTH, expand=True, padx=0, pady=0)  # Remove padding to avoid gaps
 
-    canvas = tk.Canvas(frame, background=settings["background_color"])
+    # Create a Canvas and Scrollbar
+    canvas = tk.Canvas(frame, bg=settings["background_color"], highlightthickness=0)
     scrollbar = ttk.Scrollbar(frame, orient=tk.VERTICAL, command=canvas.yview)
     scrollable_frame = ttk.Frame(canvas)
 
+    # Configure the scrollable frame
     scrollable_frame.bind(
         "<Configure>",
         lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
     )
 
+    # Add the scrollable frame to the canvas
     canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
     canvas.configure(yscrollcommand=scrollbar.set)
 
+    # Pack canvas and scrollbar to frame
     canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
     scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
     # Add keybinds to the scrollable frame
     for idx, (key, keybind) in enumerate(keybind_data["keybinds"].items(), start=1):
-        keybind_label = tk.Label(
+        keybind_label = ttk.Label(
             scrollable_frame,
             text=f"{idx}. {keybind['keys']} - {keybind['description']}",
-            font=(settings["font"], 10),
-            foreground=settings["font_color"],
-            background=settings["background_color"],
-            anchor="w"
+            font=(settings["font"], 10)
         )
         keybind_label.pack(anchor="w", pady=5)
 
-    # Start tkinter event loop
+    # Ensure the scrollable frame resizes correctly
+    scrollable_frame.update_idletasks()
+    canvas.config(scrollregion=canvas.bbox("all"))
+
+    # Start the tkinter event loop
     root.mainloop()
 
 
 def parse_args(config, default_json_index):
     """Parse command-line arguments to determine which JSON file to load."""
-    # Get JSON file mappings
     json_files = config["DEFAULT"]["json_files"].split(",")
     json_file = None
 
@@ -97,7 +110,7 @@ def parse_args(config, default_json_index):
                 print(f"Error: Invalid JSON file option '{arg}'. Defaulting...")
     if not json_file:
         json_file = json_files[default_json_index]
-    
+
     return json_file
 
 
@@ -105,7 +118,7 @@ def main():
     """Main function to load configuration, keybinds, and display the GUI."""
     config_file = "config.ini"
     config = load_config(config_file)
-    default_file_index = int(config["OPTIONS"]["default_json_file"])
+    default_file_index = int(config["OPTIONS"]["default_json_file"].strip())
 
     # Resolve the JSON file to load from CLI arguments or config
     json_file = parse_args(config, default_file_index)
@@ -117,7 +130,7 @@ def main():
             "background_color": config["DEFAULT"]["background_color"],
             "font": config["DEFAULT"]["font"],
             "font_color": config["DEFAULT"]["font_color"],
-            "opacity": float(config["DEFAULT"]["opacity"])
+            "opacity": float(config["DEFAULT"]["opacity"].strip())  # Ensure float conversion
         }
 
         # Display the keybind viewer
