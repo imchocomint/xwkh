@@ -27,16 +27,16 @@ def display_keybinds(keybind_data, settings):
     # Handle window size and appearance
     root.geometry("400x320")
     root.resizable(False, False)
-    root.attributes('-alpha', float(settings["opacity"]))
+
+    # Set background color and transparency (alpha) for the root window
+    root.configure(bg=settings["background_color"])
+    root.attributes('-alpha', float(settings["opacity"]))  # Set transparency
 
     # Create styles for ttk widgets
     style = ttk.Style()
     style.configure("TFrame", background=settings["background_color"])  # Frame background style
     style.configure("TLabel", background=settings["background_color"], foreground=settings["font_color"])  # Label style
     style.configure("TScrollbar", background=settings["background_color"], troughcolor=settings["background_color"])  # Scrollbar style
-
-    # Set main window background color
-    root.configure(bg=settings["background_color"])
 
     # Function to exit the application
     def exit_application(event):
