@@ -25,6 +25,12 @@ The config file is straightfoward. You can modify the background color, font col
 
 `default_json_file = ` will configure which file to use when there is no launch option. File number starts with 0.
 
+# To-be-added
+- transparency (it's still an issue)
+- loading config files from `$HOME/.config/`
+- loading config file from the Internet
+- separating the two columns
+
 # Credits/Thanks
 - [JaKooLit](https://github.com/JaKooLit) for his bash script
 - OpenAI for the model
