@@ -11,7 +11,7 @@ A keybindings helper. Powered by AI.
 # Use
 Download and run the binary. Press `esc` to quit.
 
-You must put the .json file and the .ini file in the same directory as the binary. There are example files on the archive (config + my hyprland keybindings)
+You must put the .json files and the .ini file in `$HOME/.config/xwkh.` Otherwise it will be in the `config` folder in the same directory. Config and keyfiles will be loaded in `.config` first, then in the app directory.
 
 # Launch options
 ## Attention: please list all the keybindings file (.json) on the config file before launching.
@@ -26,10 +26,10 @@ The config file is straightfoward. You can modify the background color, font col
 `default_json_file = ` will configure which file to use when there is no launch option. File number starts with 0.
 
 # To-be-added
-- transparency (it's still an issue)
-- loading config files from `$HOME/.config/`
-- loading config file from the Internet
-- separating the two columns
+- [ ] transparency (it's still an issue)
+- [x] loading config files from `$HOME/.config/`
+- [ ] loading config file from the Internet
+- [ ] separating the two columns
 
 # Credits/Thanks
 - [JaKooLit](https://github.com/JaKooLit) for his bash script
