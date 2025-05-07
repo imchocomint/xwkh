@@ -3,34 +3,44 @@ import sys
 import configparser
 import tkinter as tk
 from tkinter import ttk
+import os 
 
-
+def get_config_file():
+    home_config_path = os.path.join(os.path.expanduser("~"), ".config", "xwkh", "config.ini")
+    fallback_config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config", "config.ini")
+    
+    if os.path.isfile(home_config_path):
+        return home_config_path
+    elif os.path.isfile(fallback_config_path):
+        return fallback_config_path
+    else:
+        raise FileNotFoundError("Config file not found in both locations.")
+#Load configuration from a file using configparser.
 def load_config(config_file):
-    """Load configuration from a file using configparser."""
+
     config = configparser.ConfigParser()
     config.read(config_file)
     return config
 
-
+#Load keybinds from a JSON file.
 def load_keybinds(json_file):
-    """Load keybinds from a JSON file."""
     with open(json_file, "r") as file:
         return json.load(file)
 
-
+#Display keybind data in a customizable window.
 def display_keybinds(keybind_data, settings):
-    """Display keybind data in a customizable window."""
+
     # Tkinter root window setup
     root = tk.Tk()
     root.title("xwkh")
 
-    # Handle window size and appearance
-    root.geometry("400x320")
+    width = settings["width"]  # Load width from settings
+    height = settings["height"]  # Load height from settings
+    root.geometry(f"{width}x{height}")  # Use the width and height from config
     root.resizable(False, False)
 
-    # Set background color and transparency (alpha) for the root window
+    # Set background color for the root window
     root.configure(bg=settings["background_color"])
-    root.attributes('-alpha', float(settings["opacity"]))  # Set transparency
 
     # Create styles for ttk widgets
     style = ttk.Style()
@@ -45,14 +55,6 @@ def display_keybinds(keybind_data, settings):
     # Bind the ESC key to the exit function
     root.bind('<Escape>', exit_application)
 
-    # Display the message
-    msg_label = ttk.Label(
-        root,
-        text=keybind_data["message"],
-        anchor="center",
-        font=(settings["font"], 12, "bold")
-    )
-    msg_label.pack(fill=tk.X, pady=10)
 
     # Create a scrollable frame
     frame = ttk.Frame(root)
@@ -81,7 +83,7 @@ def display_keybinds(keybind_data, settings):
     for idx, (key, keybind) in enumerate(keybind_data["keybinds"].items(), start=1):
         keybind_label = ttk.Label(
             scrollable_frame,
-            text=f"{idx}. {keybind['keys']} - {keybind['description']}",
+            text=f"{keybind['keys']} | {keybind['description']}",
             font=(settings["font"], 10)
         )
         keybind_label.pack(anchor="w", pady=5)
@@ -94,12 +96,10 @@ def display_keybinds(keybind_data, settings):
     root.mainloop()
 
 
-def parse_args(config, default_json_index):
+def parse_args(json_files, default_json_index):
     """Parse command-line arguments to determine which JSON file to load."""
-    json_files = config["DEFAULT"]["json_files"].split(",")
     json_file = None
 
-    # Parse arguments to select JSON file
     if len(sys.argv) > 1:
         arg = sys.argv[1]
         if arg.startswith("-"):
@@ -108,20 +108,35 @@ def parse_args(config, default_json_index):
                 json_file = json_files[index]
             else:
                 print(f"Error: Invalid JSON file option '{arg}'. Defaulting...")
+
     if not json_file:
         json_file = json_files[default_json_index]
 
-    return json_file
+    return json_file  # Ensure it returns a filename, not a list
+
 
 
 def main():
     """Main function to load configuration, keybinds, and display the GUI."""
-    config_file = "config.ini"
-    config = load_config(config_file)
+    config_file = get_config_file()  # Retrieve config file path
+    config = load_config(config_file)  # Load the configuration file
+
     default_file_index = int(config["OPTIONS"]["default_json_file"].strip())
 
-    # Resolve the JSON file to load from CLI arguments or config
-    json_file = parse_args(config, default_file_index)
+    # Load keybinds JSON files
+    json_files = [file.strip() for file in config["DEFAULT"]["json_files"].split(",")]
+    
+    json_files_combined = []
+    for json_file in json_files:
+        home_json_path = os.path.join(os.path.expanduser("~"), ".config", "xwkh", json_file)
+        fallback_json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "configs", json_file)
+
+        if os.path.isfile(home_json_path):
+            json_files_combined.append(home_json_path)
+        elif os.path.isfile(fallback_json_path):
+            json_files_combined.append(fallback_json_path)
+    
+    json_file = parse_args(json_files_combined, default_file_index)
 
     try:
         # Load the JSON file and extract settings
@@ -130,7 +145,10 @@ def main():
             "background_color": config["DEFAULT"]["background_color"],
             "font": config["DEFAULT"]["font"],
             "font_color": config["DEFAULT"]["font_color"],
-            "opacity": float(config["DEFAULT"]["opacity"].strip())  # Ensure float conversion
+            "opacity": float(config["DEFAULT"]["opacity"].strip()),  # Ensure float conversion
+            "width": int(config["DEFAULT"]["width"].strip()),  # Load width and convert to int # type: ignore
+            "height": int(config["DEFAULT"]["height"].strip())  # Load height and convert to int
+        
         }
 
         # Display the keybind viewer

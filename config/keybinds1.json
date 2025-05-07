@@ -2,138 +2,111 @@
     "keybinds": {
         "keybind_1": {
             "keys": "ESC",
-            "description": "Close this app",
-            "notes": " WIN (SUPER KEY)"
+            "description": "Close this app"
         },
         "keybind_2": {
             "keys": "WIN SHIFT K",
-            "description": "Searchable Keybinds",
-            "notes": "(Search all Keybinds via rofi)"
+            "description": "Searchable Keybinds"
         },
         "keybind_3": {
             "keys": "WIN SHIFT E",
-            "description": "KooL Hyprland Settings Menu",
-            "notes": ""
+            "description": "KooL Hyprland Settings Menu"
         },
         "keybind_4": {
             "keys": "WIN Enter",
-            "description": "Terminal",
-            "notes": "(kitty)"
+            "description": "Terminal"
         },
         "keybind_5": {
             "keys": "WIN SHIFT Enter",
-            "description": "DropDown Terminal",
-            "notes": "WIN Q to close"
+            "description": "DropDown Terminal"
         },
         "keybind_6": {
             "keys": "WIN A",
-            "description": "Desktop Overview",
-            "notes": "(AGS - if opted to install)"
+            "description": "Desktop Overview"
         },
         "keybind_7": {
             "keys": "WIN D",
-            "description": "Application Launcher",
-            "notes": "(rofi-wayland)"
+            "description": "Application Launcher"
         },
         "keybind_8": {
             "keys": "WIN E",
-            "description": "Open File Manager",
-            "notes": "(Dolphin)"
+            "description": "Open File Manager"
         },
         "keybind_9": {
             "keys": "WIN S",
-            "description": "Google Search using rofi",
-            "notes": "(rofi)"
+            "description": "Google Search using rofi"
         },
         "keybind_10": {
             "keys": "WIN Q",
-            "description": "Close active window",
-            "notes": "(not kill)"
+            "description": "Close active window"
         },
         "keybind_11": {
             "keys": "WIN SHIFT Q",
-            "description": "Kill active window",
-            "notes": "(kill)"
+            "description": "Kill active window"
         },
         "keybind_12": {
             "keys": "WIN ALT mouse scroll up/down",
-            "description": "Desktop Zoom",
-            "notes": "Desktop Magnifier"
+            "description": "Desktop Zoom"
         },
         "keybind_13": {
             "keys": "WIN ALT V",
-            "description": "Clipboard Manager",
-            "notes": "(cliphist)"
+            "description": "Clipboard Manager"
         },
         "keybind_14": {
             "keys": "WIN W",
-            "description": "Choose wallpaper",
-            "notes": "(Wallpaper Menu)"
+            "description": "Choose wallpaper"
         },
         "keybind_15": {
             "keys": "WIN SHIFT W",
-            "description": "Choose wallpaper effects",
-            "notes": "(imagemagick + swww)"
+            "description": "Choose wallpaper effects"
         },
         "keybind_16": {
             "keys": "WIN CTRL B",
-            "description": "Choose waybar styles",
-            "notes": "(waybar styles)"
+            "description": "Choose waybar styles"
         },
         "keybind_17": {
             "keys": "WIN ALT B",
-            "description": "Choose waybar layout",
-            "notes": "(waybar layout)"
+            "description": "Choose waybar layout"
         },
         "keybind_18": {
             "keys": "WIN ALT R",
-            "description": "Reload Waybar swaync Rofi",
-            "notes": "CHECK NOTIFICATION FIRST!!!"
+            "description": "Reload Waybar swaync Rofi"
         },
         "keybind_19": {
             "keys": "WIN SHIFT N",
-            "description": "Launch Notification Panel",
-            "notes": "swaync Notification Center"
+            "description": "Launch Notification Panel"
         },
         "keybind_20": {
             "keys": "WIN Print",
-            "description": "Screenshot",
-            "notes": "(grim)"
+            "description": "Screenshot"
         },
         "keybind_21": {
             "keys": "WIN SHIFT Print",
-            "description": "Screenshot region",
-            "notes": "(grim + slurp)"
+            "description": "Screenshot region"
         },
         "keybind_22": {
             "keys": "WIN SHIFT S",
-            "description": "Screenshot region",
-            "notes": "(swappy)"
+            "description": "Screenshot region"
         },
         "keybind_23": {
             "keys": "WIN CTRL Print",
-            "description": "Screenshot timer 5 secs",
-            "notes": "(grim)"
+            "description": "Screenshot timer 5 secs"
         },
         "keybind_24": {
             "keys": "WIN CTRL SHIFT Print",
-            "description": "Screenshot timer 10 secs",
-            "notes": "(grim)"
+            "description": "Screenshot timer 10 secs"
         },
         "keybind_25": {
             "keys": "ALT Print",
-            "description": "Screenshot active window",
-            "notes": "Active window only"
+            "description": "Screenshot active window"
         },
         "keybind_26": {
             "keys": "CTRL ALT P",
-            "description": "Power Menu",
-            "notes": "(wlogout)"
+            "description": "Power Menu"
         },
         "keybind_27": {
             "keys": "CTRL ALT L",
-            "description": "Screen Lock",
-            "notes": "(hyprlock)"
+            "description": "Screen Lock"
         },
         "keybind_28": {
             "keys": "CTRL ALT Del",
@@ -197,14 +170,12 @@
         },
         "keybind_40": {
             "keys": "WIN ALT E",
-            "description": "Rofi Emoticons",
-            "notes": "Emoticon"
+            "description": "Rofi Emoticons"
         },
         "keybind_41": {
             "keys": "WIN H",
-            "description": "Launch this Quick Cheat Sheet",
-            "notes": ""
+            "description": "Launch this Quick Cheat Sheet"
         }
     },
-    "message": "☣️ NOTE ☣️: Clicking with Mouse or Pressing ENTER will have NO function"
+    "message": ""
 }
