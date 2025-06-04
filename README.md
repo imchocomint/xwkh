@@ -3,6 +3,8 @@ A keybindings helper. Powered by AI.
 
 ## Based on [this script](https://github.com/JaKooLit/Hyprland-Dots/blob/main/config/hypr/scripts/KeyHints.sh) by [JaKooLit](https://github.com/JaKooLit). Converted to Python using GPT O4 mini (Merlin).
 
+## I'm porting this to PyQt to see if transparency works
+
 # Feature
 - small package
 - uses JSON to configure keybinds to display
