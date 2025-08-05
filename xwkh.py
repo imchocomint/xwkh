@@ -2,7 +2,7 @@ import json
 import sys
 import configparser
 import os
-from PyQt6.QtWidgets import QApplication, QMainWindow, QScrollArea, QWidget, QVBoxLayout, QLabel, QGridLayout
+from PyQt6.QtWidgets import QApplication, QMainWindow, QScrollArea, QWidget, QVBoxLayout, QLabel, QGridLayout, QGraphicsOpacityEffect
 from PyQt6.QtGui import QFont
 from PyQt6.QtCore import Qt, QEvent
 
@@ -48,8 +48,11 @@ def display_keybinds(keybind_data, settings):
             background-color: {settings['background_color']};
         }}
     """)
-    opacity = max(0.0, min(1.0, settings["opacity"]))
-    window.setWindowOpacity(opacity)
+    opacity = max(0.0, min(1.0, settings["opacity"]))    
+    opacity_effect = QGraphicsOpacityEffect()
+    opacity_effect.setOpacity(opacity) 
+    window.setGraphicsEffect(opacity_effect)
+    # window.setWindowOpacity(opacity)
 
     scroll_area = QScrollArea()
     scroll_area.setWidgetResizable(True)
