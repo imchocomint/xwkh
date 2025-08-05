@@ -1,9 +1,8 @@
 # xwkh (x-wayland keybindings helper)
-A keybindings helper. Powered by AI.
+A keybindings helper.
 
-## Based on [this script](https://github.com/JaKooLit/Hyprland-Dots/blob/main/config/hypr/scripts/KeyHints.sh) by [JaKooLit](https://github.com/JaKooLit). Converted to Python using GPT O4 mini (Merlin).
+## Based on [this script](https://github.com/JaKooLit/Hyprland-Dots/blob/main/config/hypr/scripts/KeyHints.sh) by [JaKooLit](https://github.com/JaKooLit). Converted to Python using GPT O4 mini (Merlin). Fixes by me.
 
-## I'm porting this to PyQt to see if transparency works
 
 # Feature
 - small package
@@ -31,7 +30,7 @@ The config file is straightfoward. You can modify the background color, font col
 - [ ] transparency (it's still an issue)
 - [x] loading config files from `$HOME/.config/`
 - [ ] loading config file from the Internet
-- [ ] separating the two columns
+- [x] separating the two columns
 
 # Credits/Thanks
 - [JaKooLit](https://github.com/JaKooLit) for his bash script
