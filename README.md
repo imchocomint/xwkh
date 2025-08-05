@@ -27,13 +27,13 @@ The config file is straightfoward. You can modify the background color, font col
 `default_json_file = ` will configure which file to use when there is no launch option. File number starts with 0.
 
 # To-be-added
-- [ ] transparency (it's still an issue)
+- [x] transparency ([gemini is fucking dumb](https://www.tutorialspoint.com/pyqt/pyqt_opacity_effect.htm))
 - [x] loading config files from `$HOME/.config/`
 - [ ] loading config file from the Internet
-- [x] separating the two columns
+- [x] separating the two columns (now with invisible barrier; might be a real column separator itf)
 
 # Credits/Thanks
 - [JaKooLit](https://github.com/JaKooLit) for his bash script
-- OpenAI for the model
-- Merlin for the service
+- OpenAI and Google for the model
+- Merlin and Google for the service
 - me for testing and fixing bugs (yes, there are)
